@@ -20,7 +20,7 @@ BYOG is a minimal Git-like version control system built in Node.js to help you u
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/byog.git
+git clone https://github.com/Abubakar00510/Byog-git_clone
 ```
 ## Usage
 
