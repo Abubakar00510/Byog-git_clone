@@ -2,30 +2,26 @@ const crypto = require("crypto");
 const zlib = require("zlib");
 
 class ByogObject {
-    #obj_type;
-    #content;
+    
   constructor(obj_type, content) {
-    this.#obj_type = obj_type;
-    this.#content = content;
+    this.obj_type = obj_type;
+    this.content = content;
   }
-   get content() {
-        return this.#content;
-    }
     
   hash = () => {
     const header = Buffer.from(
-      this.#obj_type + " " + this.#content.length + "\0"
+      this.obj_type + " " + this.content.length + "\0"
     );
 
     return crypto
       .createHash("sha1")
-      .update(Buffer.concat([header, this.#content]))
+      .update(Buffer.concat([header, this.content]))
       .digest("hex");
   };
 
   serialize = () => {
-    const header = Buffer.from(`${this.#obj_type} ${this.#content.length}\0`);
-    return zlib.gzipSync(Buffer.concat([header, this.#content]));
+    const header = Buffer.from(`${this.obj_type} ${this.content.length}\0`);
+    return zlib.gzipSync(Buffer.concat([header, this.content]));
   };
 
   static deserialize = (data) => {
